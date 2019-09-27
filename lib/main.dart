@@ -8,9 +8,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: "Ay App",
-      home: new HomePage(),
-    );
+        title: "Ay App",
+        home: new HomePage(),
+        theme: new ThemeData(
+          accentColor: Colors.red,
+          brightness: Brightness.light,
+          primarySwatch: Colors.blue,
+        ));
   }
 }
 
@@ -32,6 +36,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _clickMe() {
+    setState(() {
+      myText = "Click Me button clicked";
+    });
+  }
+
   Widget _bodyWidget() {
     return new Container(
         padding: const EdgeInsets.all(8.0),
@@ -44,7 +54,16 @@ class _HomePageState extends State<HomePage> {
                 child: new Text("Click"),
                 color: Colors.red,
                 onPressed: _changeText,
-              )
+              ),
+              new RaisedButton(
+                child: new Text("Click Mw"),
+                color: Colors.amber,
+                onPressed: _clickMe,
+              ),
+              new Icon(
+                Icons.adb,
+                color: Colors.red[500],
+              ),
             ],
           ),
         ));
@@ -53,9 +72,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Home Page"),
+      appBar: new AppBar(
+        title: new Text("Home Page"),
+      ),
+      body: _bodyWidget(),
+      floatingActionButton: new FloatingActionButton(
+        child: new Icon(
+          Icons.add,
+          color: Colors.white,
         ),
-        body: _bodyWidget());
+        backgroundColor: Colors.red,
+        onPressed: _changeText,
+      ),
+    );
   }
 }
